@@ -1,7 +1,7 @@
 require 'Docking_Station'
 
-describe 'Docking_Station' do
-  it 'check for operating docking_station' do
-    expect(working(yes_no)).to eq true
+describe DockingStation do
+  it 'responds to release_bike' do
+    expect(subject).to respond_to :release_bike
   end
 end
