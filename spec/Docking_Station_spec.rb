@@ -6,15 +6,15 @@ describe DockingStation do
 
 
 
-   it 'raises an error message when dock full' do
-
+   it 'if default is not specified, constant is used' do
      expect { 21.times { subject.dock(Bike.new) }}.to raise_error('Docking full')
    end
 
-   # it 'releases a working bike' do
-   #   bike = subject.release_bike
-   #   expect(bike).to be_working
-   # end
+   it 'if default is not specified, constant is used' do
+     station1 = DockingStation.new(30)
+     expect { 31.times { station1.dock(Bike.new) }}.to raise_error('Docking full')
+   end
+
    #
    it 'can call dock method 20times' do
      DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
