@@ -13,17 +13,19 @@ class DockingStation
 
   def dock(bike)
     fail 'Docking full' if self.full?
-      @bikes.push(bike)
+      @bikes << bike
+      self
   end
 
 
   def release_bike
-    fail 'no bikes left' if @bikes.empty?
-      @bikes.pop
-    end
+    fail 'No bikes docked' if @bikes.empty?
+      working_bikes = []
+      @bikes.each { |bike| bike.working? ? working_bikes << bike : next }
+      working_bikes.count == 0 ? fail("No working bikes to release") : working_bikes.pop
+  end
 
-
-  # private
+  private
 
   def full?
     @bikes.count >= @capacity ? true : false

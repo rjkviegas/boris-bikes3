@@ -1,5 +1,9 @@
 require 'bike'
 
 describe Bike do
-  it { is_expected.to respond_to :working? }
+  describe '#broken' do
+    it 'results in Bike instance returning false for working?' do
+      expect(subject.broken.working?).to eq false
+    end
+  end
 end
