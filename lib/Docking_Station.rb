@@ -23,7 +23,7 @@ class DockingStation
     fail 'no bikes left'
     else
       @bikes.pop
-    # @bike
+
     end
   end
 
