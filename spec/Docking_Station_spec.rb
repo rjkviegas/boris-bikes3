@@ -1,3 +1,4 @@
+# test git add .
 require 'Docking_Station'
 
 describe DockingStation do
