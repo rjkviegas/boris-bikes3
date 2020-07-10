@@ -1,42 +1,45 @@
-# test git add .
 require_relative 'bike'
 
 class DockingStation
   DEFAULT_CAPACITY = 20
-  attr_reader :bikes, :capacity
+  attr_reader :working_bikes, :capacity, :broken_bikes, :bikes
 
 
   def initialize(capacity=DEFAULT_CAPACITY)
-    @bikes = []
+    @working_bikes = []
+    @broken_bikes = []
     @capacity = capacity
+    @bikes = 0
   end
 
   def dock(bike)
     fail 'Docking full' if self.full?
-      @bikes << bike
+      bike.working? ? @working_bikes << bike : @broken_bikes << bike
+      @bikes += 1
       self
   end
 
 
   def release_bike
-    fail 'No bikes docked' if @bikes.empty?
-      working_bikes = []
-      @bikes.each { |bike| bike.working? ? working_bikes << bike : next }
-      working_bikes.count == 0 ? fail("No working bikes to release") : working_bikes.pop
+    fail 'No working_bikes docked' if @working_bikes.empty?
+      @bikes -= 1
+      working_bikes.pop
   end
 
   private
 
   def full?
-    @bikes.count >= @capacity ? true : false
+    @bikes >= @capacity ? true : false
   end
 
   def empty?
-    @bike.count == O ? true : false
+    @bikes == O ? true : false
   end
 end
+=begin
+dock1 = DockingStation.new
+# p dock1.dock(Bike.new)
+# p dock1.bikes
+p 21.times {dock1.dock(Bike.new)}
+=end
 
-
-# docking_station = DockingStation.new
-
-# p bmx = bike.release_bike.working?
