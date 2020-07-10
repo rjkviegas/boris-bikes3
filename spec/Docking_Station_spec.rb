@@ -4,7 +4,7 @@ describe DockingStation do
     it { is_expected.to respond_to :release_bike }
     it { is_expected.to respond_to(:bikes) }
     
-  describe 'capacity' do
+  describe '#capacity' do
     it 'if capacity not specified, constant is used' do
       expect { 21.times { subject.dock(Bike.new) }}.to raise_error('Docking full')
     end
@@ -20,7 +20,7 @@ describe DockingStation do
     end
   end
 
-  describe 'release_bike' do
+  describe '#release_bike' do
     it 'raises an error message when no bikes left' do
       expect { subject.release_bike }.to raise_error('No bikes docked')
     end
