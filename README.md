@@ -1,17 +1,7 @@
 BORIS BIKES
 
-A first project at Makers using pair programming.
+Day 3 of of Week 1 Afternoon pairing Challenge - Pairing partner Hilda
 
--- Nouns
-Person        
-Bike         
-DockingStation
-
--- Verbs                           
--use 
--release
--see
--working?
 
 <table style="width:100%">
   <tr>
