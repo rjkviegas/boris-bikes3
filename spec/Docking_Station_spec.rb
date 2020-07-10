@@ -6,7 +6,7 @@ describe DockingStation do
     
   describe '#capacity' do
     it 'if capacity not specified, constant is used' do
-      expect { 21.times { subject.dock(Bike.new) }}.to raise_error('Docking full')
+      expect { 21.times { subject.dock double }}.to raise_error('Docking full')
     end
 
     it 'if capacity is specified, constant it not used' do
@@ -28,6 +28,12 @@ describe DockingStation do
     it 'does not return a broken bike' do
       broken_bike = Bike.new.broken
       expect { subject.dock(broken_bike).release_bike }.to raise_error "No working bikes to release"
+    end
+
+    it 'release a working bike' do
+      subject.dock double(:bike)
+      bike = subject.release_bike
+      expect(bike).to be_working
     end
   end
 end 
