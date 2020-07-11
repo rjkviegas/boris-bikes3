@@ -11,7 +11,7 @@ class DockingStation
     @capacity = capacity
     @bikes = 0
   end
-
+  # methods used by Person objects to dock/release bikes
   def dock(bike)
     fail 'Docking full' if self.full?
       bike.working? ? @working_bikes << bike : @broken_bikes << bike
@@ -25,7 +25,20 @@ class DockingStation
       @bikes -= 1
       working_bikes.pop
   end
+  # method for storing bikes (plural) from vans
 
+  def stock(bike_array)
+    bike_array.each do |bike| 
+      raise("No capacity for more bikes") if self.full?
+      if bike.working? == true
+        @working_bikes << bike 
+      else
+        @broken_bikes << bike
+      end
+      @bikes += 1
+    end
+  end
+    
   private
 
   def full?
@@ -44,7 +57,7 @@ p 21.times {dock1.dock(Bike.new)}
 =end
 
 class Van
-  attr_reader :bikes, :capacity
+  attr_reader :bikes, :capacity, :stored_bikes
 
   def initialize(capacity = 20)
     @bikes = 0
@@ -58,7 +71,7 @@ class Van
       @stored_bikes << bike 
       @bikes += 1
     end
-    self
+    @stored_bikes
   end
 
   def dispense_bikes
@@ -77,9 +90,25 @@ class Van
 end
 
 class Garage
+  attr_reader :bikes, :stored_bikes
+
   def initialize(capacity = 100)
-    @bikes = []
+    @stored_bikes = []
     @capacity = capacity
+    @bikes = 0
+  end
+
+  def repair(bike_array)
+    bike_array.each do |bike|
+      raise("Garage is at capacity") if self.full?
+      bike.working=(true)
+      @bikes += 1
+      @stored_bikes << bike
+    end
+  end
+
+  def full?
+    @bikes == @capacity ? true : false
   end
 end
 

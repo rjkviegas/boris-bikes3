@@ -45,4 +45,14 @@ describe DockingStation do
       expect(released_bike).to be_working
     end
   end
+
+  describe '#stock()' do
+    let(:bike) {double :bike }
+    let(:van) { double :van }
+    it 'takes bikes from van object and stores them' do
+      allow(bike).to receive(:working?).and_return(true)
+      allow(van).to receive(:stored_bikes).and_return([bike])
+      expect(DockingStation.new.stock(van.stored_bikes).count).to eq 1
+    end
+  end
 end 
